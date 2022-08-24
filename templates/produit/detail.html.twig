@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ Detail.proLibelle }} {% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <form action="{{ path('addPanier', {id:Detail.id}) }}" method="post">
+            <div class="row">
+                <div class="col-6 text-center">            
+                    <img src="/images/produits/{{ Detail.proLibelle }}.{{ Detail.proPhoto }}" alt="produit"> 
+                </div>
+                <div class="col-6 text-start">
+                    <h4> {{Detail.proLibelle}} </h4> 
+                    <p> {{Detail.proDescription}} </p>
+                    <p> Stock: {{Detail.proStock}} </p>
+                    <p> Prix: {{Detail.prixTTC}} € </p>
+                    Quantité: <input type="number" name="quantity" min="1" max="{{Detail.proStock}}" value="1" style="width:7%; border-radius:15%; border:1px solid grey">
+                </div>
+            </div>
+            <div class="row justify-content-center my-5">
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary mb-3"> Ajouter au panier </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

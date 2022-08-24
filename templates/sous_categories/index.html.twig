@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ Categorie.catNom }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <ul>
+            <div class="row justify-content-center mt-4">
+                <div class="col-10">
+                    <div class="row">
+                        <h1 class="text-center mb-4"> {{ Categorie.catNom }} </h1>
+                        {% for souscategory in SousCategories %}
+                            <div class="col-4 d-inline">  
+                                <li class="text-center mx-2 my-3">
+                                    <a href="{{ path('produit', {id:souscategory.id}) }}"> 
+                                        <img src="/images/souscategories/{{ Categorie.catNom }}/{{ souscategory.sousCatNom }}.{{ souscategory.sousCatPhoto }}" alt="souscategorie">
+                                        <h5>{{souscategory.sousCatNom}}</h5> 
+                                    </a> 
+                                </li> 
+                            </div> 
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+{% endblock %}

@@ -8,7 +8,7 @@
                 {# Si la panier n'est pas vide et contient des produits on les affiche #}
                 {% if panier | length > 0 %} 
                     <h3 class="text-center mb-5"> Votre panier </h3>       
-                    
+
                     {% if messageStock is defined  and  messageStock | length > 0 %}
                         <div class="alert alert-danger" role="alert"> {{ messageStock }} </div>                        
                     {% endif %}  
@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody> 
-                            {# ici on déclare la variable montantTotal danslaquelle on va sauvegarder la montant total de tous les produit de panier #}
+                            {# ici on déclare la variable montantTotal dans laquelle on va sauvegarder la montant total de tous les produit de panier #}
                             {% set montantTotal = 0 %} 
 
                             {% for produit in panier %}
@@ -38,7 +38,6 @@
                                         <a href="{{ path('removePanier', {id:produit.id}) }}" class="btn btn-warning"> <i class="bi bi-cart-dash-fill fa-lg me-3"></i> </a>
                                         <a href="{{ path('deletePanier', {id:produit.id}) }}" class="btn btn-danger"> <i class="bi bi-trash-fill fa-lg"></i> </a> 
                                     </td>
-                                    
                                     {# à chaque tour de la boucle for on additionne le montant de chaque produit #}
                                     {% set montantTotal = montantTotal + (produit.prix * produit.quantite) %}  
                                 </tr>
@@ -49,7 +48,9 @@
                     <div class="row justify-content-end">
                         <a href="{{ path('categories_index') }}" style="text-decoration:none" class="mb-4"> + Ajouter produits </a>                
                         <h5 class="d-inline" id="montantTotal"> Montant total : {{ montantTotal }}  </h5> 
-                        <button class="btn btn-success ml-3"> Valider </button>    
+                        <a href="{{ path('payPanier') }}" class="text-center my-3" style="text-decoration:none; color:white"> 
+                            <button class="btn btn-success px-5"> Payer </button>
+                        </a>     
                     </div>
                 {% else %}
                     <div class="text-center"> 
@@ -62,17 +63,8 @@
     </div>
 {% endblock %}
 
-{% block javascripts %} 
-    <script>
-        $(document).ready(function(){
-            $('.quantity').click(function(){
-                let quantite = $(this).val();
-                alert(quantite);
-            })
-        })
-       
 
-        
-    </script>
+{% block javascripts %} 
+
 {% endblock %}
 

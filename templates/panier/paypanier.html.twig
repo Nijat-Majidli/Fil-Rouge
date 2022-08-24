@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block title %} Panier {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <h3> Panier d'achat </h3>
+            </div>
+            <div class="col-2">
+                <a href="{{ path('panier') }}"> <h5> Editer </h5> </a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-7">
+                {# ici on déclare la variable montantTotal dans laquelle on va sauvegarder la montant total de tous les produit de panier #}
+                {% set montantTotal = 0 %} 
+
+                <ul class="p-0"> 
+                    {% for produit in panier %}
+                        <li> {{produit.quantite}} x {{produit.description}} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-2">
+                <ul class="p-0"> 
+                    {% for produit in panier %}
+                        <li> <h5>{{produit.montant}} €</h5> </li>
+                        {% set montantTotal = montantTotal + produit.montant %} 
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <hr>
+            <div class="row justify-content-center">
+            <div class="col-7">
+                <h4> Total </h4>
+            </div>
+            <div class="col-2">
+                <h5> {{montantTotal}} </h5>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <h3>Méthode de paiement</h3>
+                <div> <input type="radio" name="payment"> Carte de crédit </div>
+                <div> <input type="radio" name="payment"> Virement </div>
+            </div>
+        </div>
+        <div class="row text-center py-5">
+            <div class="col">
+                <a href="{{ path('commande') }}" class="text-center my-3" style="text-decoration:none; color:white"> 
+                    <button class="btn btn-success px-5"> Valider </button>
+                </a>     
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %} 
+
+{% endblock %}

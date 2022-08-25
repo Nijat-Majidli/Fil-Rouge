@@ -164,6 +164,22 @@ class PanierController extends AbstractController
 
 
     /**
+     * @Route("/deleteAllPanier", name="delete_allPanier")
+     */
+    public function deleteAllPanier(SessionInterface $session, CategoriesRepository $catRepo): Response
+    {
+        $panier = $session->set("panier", []);
+
+        //  On peut aussi vider le panier comme ça:   $panier = $session->remove("panier");
+
+        return $this->render('panier/index.html.twig', [
+            'panier' => $panier,
+            'categories' => $catRepo->findAll()
+        ]);
+    }
+
+
+    /**
      * @Route("/payPanier", name="payPanier")
     */
    public function payPanier(SessionInterface $session, ProduitRepository $prodRepo, CategoriesRepository $catRepo): Response

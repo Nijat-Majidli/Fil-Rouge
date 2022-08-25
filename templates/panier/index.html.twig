@@ -19,7 +19,7 @@
                                 <th scope="col"> Photo </th>
                                 <th scope="col"> Libelle </th>
                                 <th scope="col"> Prix </th>
-                                <th scope="col"> Quantité </th>
+                                <th scope="col" class="text-center"> Quantité </th>
                                 <th scope="col" class="text-center"> Action </th>
                             </tr>
                         </thead>
@@ -45,13 +45,23 @@
                         </tbody>
                     </table>
 
-                    <div class="row justify-content-end">
-                        <a href="{{ path('categories_index') }}" style="text-decoration:none" class="mb-4"> + Ajouter produits </a>                
-                        <h5 class="d-inline" id="montantTotal"> Montant total : {{ montantTotal }}  </h5> 
-                        <a href="{{ path('payPanier') }}" class="text-center my-3" style="text-decoration:none; color:white"> 
-                            <button class="btn btn-success px-5"> Payer </button>
-                        </a>     
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <a href="{{ path('categories_index') }}" style="text-decoration:none" class="mb-4"> <h5>+ Ajouter produits</h5> </a>    
+                        </div>
+                        <div class="col-9 text-end">
+                            <a href="{{ path('delete_allPanier') }}"> 
+                                <button class="btn btn-danger"> Vider panier <i class="bi bi-trash-fill fa-lg"></i> </button>
+                            </a>  
+                        </div>
+                    </div>      
+                    <hr>
+                    <div>    
+                        <h5 class="text-end" id="montantTotal"> Montant total : {{ montantTotal }} € </h5> 
                     </div>
+                    
+                    <a href="{{ path('payPanier') }}" class="btn btn-success m-5 w-75 text-center" style="text-decoration:none; color:white"> Payer </a>     
+                
                 {% else %}
                     <div class="text-center"> 
                         <h3> Votre panier est vide </h3>

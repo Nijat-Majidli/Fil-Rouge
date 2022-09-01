@@ -2,8 +2,8 @@
 {% block title %} Panier {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="container mt-3">
+        <div class="row justify-content-center mb-2">
             <div class="col-7">
                 <h3> Panier d'achat </h3>
             </div>
@@ -16,7 +16,7 @@
                 {# ici on déclare la variable montantTotal dans laquelle on va sauvegarder la montant total de tous les produit de panier #}
                 {% set montantTotal = 0 %} 
 
-                <ul class="p-0"> 
+                <ul class="pl-2"> 
                     {% for produit in panier %}
                         <li> {{produit.quantite}} x {{produit.description}} </li>
                     {% endfor %}
@@ -44,11 +44,11 @@
         <div class="row justify-content-center">
             <div class="col-9 mb-5">
                 <h3>Méthode de paiement</h3>
-                <div>
+                <form action="{{ path('commande_save') }}" method="post">
                     <div class="radioInput my-3"> 
-                        <input type="radio" name="payment"> Carte de crédit 
-                        <img src="/images/caisse/cardpayment.png" style="width:9%; margin-left:5%">
-                        <form style="display:none" class="secondChild">
+                        <input type="radio" name="payment" value="carte de crédit" checked> Carte de crédit 
+                        <img src="/images/caisse/cardpayment.png" style="width:10%; margin-left:5%">
+                        <div class="secondChild">
                             <div class="form-group">
                                 <input type="text" class="form-control mb-2" placeholder="Numéro de la carte">
                             </div>
@@ -65,7 +65,7 @@
                                 <div class="col">
                                     <select class="form-select">
                                         <option selected>Année</option>
-                                        {% set years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032] %} 
+                                        {% set years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035] %} 
                                         {% for annee in years %}
                                             <option value="{{annee}}"> {{annee}} </option>
                                         {% endfor %}
@@ -78,30 +78,30 @@
                             <div class="form-group">
                                 <input type="text" class="form-control mb-2" placeholder="Nom du détenteur">
                             </div>
-                             <div class="row text-center py-5">
-                                <div class="col">
-                                    <a href="{{ path('commande') }}" class="text-center my-3" style="text-decoration:none; color:white"> 
-                                        <button class="btn btn-success px-5"> Valider </button>
-                                    </a>     
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                     <hr>
                     <div class="radioInput my-3"> 
-                        <input type="radio" name="payment"> Virement (IBAN/BIC)
-                        <p style="display:none" class="secondChild"> Une fois que votre com­mande aura été trai­tée par un membre de notre équipe com­mer­ciale, 
-                        vous re­ce­vrez une confir­ma­tion de com­mande conte­nant nos co­or­don­nées ban­caires par email. À noter qu’un vi­re­ment ban­caire prend 
-                        entre 1 à 2 jours ou­vrés pour nous par­ve­nir et que l’en­voi ne se fait qu’une fois que nous l’avons reçu. </p>
+                        <input type="radio" name="payment" value="virement"> Virement (IBAN/BIC)
+                        <p style="display:none" class="secondChild"> 
+                            Une fois que votre com­mande aura été trai­tée par un membre de notre équipe com­mer­ciale, vous re­ce­vrez 
+                            une confir­ma­tion de com­mande conte­nant nos co­or­don­nées ban­caires par email. À noter qu’un vi­re­ment ban­caire 
+                            prend entre 1 à 2 jours ou­vrés pour nous par­ve­nir et que l’en­voi ne se fait qu’une fois que nous l’avons reçu. 
+                        </p>
                     </div>
                     <hr>
                     <div class="radioInput my-3"> 
-                        <input type="radio" name="payment"> PayPal 
+                        <input type="radio" name="payment" value="paypal"> PayPal 
                         <img src="/images/caisse/paypal.png" style="width:2.2%; margin-left:12%">
-                        <p style="display:none" class="secondChild"> Pay­pal est un ser­vice de paie­ment élec­tro­nique sé­cu­ri­sé qui vous per­met de 
-                        ré­gler vos achats en toute sim­pli­ci­té, ra­pi­de­ment et sans frais sup­plé­men­taires. </p>
+                        <p style="display:none" class="secondChild"> 
+                            Pay­pal est un ser­vice de paie­ment élec­tro­nique sé­cu­ri­sé qui vous per­met de 
+                            ré­gler vos achats en toute sim­pli­ci­té, ra­pi­de­ment et sans frais sup­plé­men­taires. 
+                        </p>
                     </div>
-                </div>
+                    <div class="row text-center py-5">
+                        <div class="col"> <button class="btn btn-success px-5"> Valider </button> </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -111,6 +111,7 @@
     <script>
         $(document).ready(function(){
              $(".radioInput").click(function(){
+                $(this).children(':radio').prop("checked", true);
                 $(this).children('.secondChild').css('display', 'block');
                 $(this).siblings().children('.secondChild').css('display', 'none');
             });

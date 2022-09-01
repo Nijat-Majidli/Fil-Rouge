@@ -50,6 +50,11 @@ class Commande
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $comMontant;
+
 
     public function __construct()
     {
@@ -147,6 +152,18 @@ class Commande
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getComMontant(): ?float
+    {
+        return $this->comMontant;
+    }
+
+    public function setComMontant(float $comMontant): self
+    {
+        $this->comMontant = $comMontant;
 
         return $this;
     }

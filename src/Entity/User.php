@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -34,6 +36,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userNom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userPrenom;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $userCategorie;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userAdresse;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userCP;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userVille;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userPays;
 
     public function getId(): ?int
     {
@@ -122,5 +164,101 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getUserNom(): ?string
+    {
+        return $this->userNom;
+    }
+
+    public function setUserNom(string $userNom): self
+    {
+        $this->userNom = $userNom;
+
+        return $this;
+    }
+
+    public function getUserPrenom(): ?string
+    {
+        return $this->userPrenom;
+    }
+
+    public function setUserPrenom(string $userPrenom): self
+    {
+        $this->userPrenom = $userPrenom;
+
+        return $this;
+    }
+
+    public function getUserCategorie(): ?string
+    {
+        return $this->userCategorie;
+    }
+
+    public function setUserCategorie(string $userCategorie): self
+    {
+        $this->userCategorie = $userCategorie;
+
+        return $this;
+    }
+
+    public function getUserAdresse(): ?string
+    {
+        return $this->userAdresse;
+    }
+
+    public function setUserAdresse(string $userAdresse): self
+    {
+        $this->userAdresse = $userAdresse;
+
+        return $this;
+    }
+
+    public function getUserCP(): ?int
+    {
+        return $this->userCP;
+    }
+
+    public function setUserCP(int $userCP): self
+    {
+        $this->userCP = $userCP;
+
+        return $this;
+    }
+
+    public function getUserVille(): ?string
+    {
+        return $this->userVille;
+    }
+
+    public function setUserVille(string $userVille): self
+    {
+        $this->userVille = $userVille;
+
+        return $this;
+    }
+
+    public function getUserPays(): ?string
+    {
+        return $this->userPays;
+    }
+
+    public function setUserPays(string $userPays): self
+    {
+        $this->userPays = $userPays;
+
+        return $this;
     }
 }

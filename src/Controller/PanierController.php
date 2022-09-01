@@ -180,7 +180,7 @@ class PanierController extends AbstractController
 
 
     /**
-     * @Route("/payPanier", name="payPanier")
+     * @Route("/profile/payPanier", name="payPanier")
     */
    public function payPanier(SessionInterface $session, ProduitRepository $prodRepo, CategoriesRepository $catRepo): Response
    {

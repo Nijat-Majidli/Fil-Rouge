@@ -1,20 +1,55 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %} Vos commandes {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-9 my-5">
+                {# S'il y a des produits commandées on les affiche #}
+                {% if Commande is defined and Commande|length > 0 %} 
+                    <h3 class="text-center mb-5"> Vos commandes </h3>       
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/FilRouge/src/Controller/CommandeController.php'|file_link(0) }}">src/Controller/CommandeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/FilRouge/templates/commande/index.html.twig'|file_link(0) }}">templates/commande/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"> Numéro </th>
+                                <th scope="col"> Date de la commande </th>
+                                <th scope="col"> Montant </th>
+                                <th scope="col"> Date de la livraison </th>
+                                <th scope="col"> Facture </th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            {% for com in Commande %}    
+                                <tr>           
+                                    <td> {{com.id}} </td>
+                                    <td> {{com.comDate|date("d/m/Y")}} </td>
+                                    <td> {{com.comMontant}}</td>
+                                    {% if com.dateLivraison is empty %}
+                                        <td> {{'Livraison en cours'}}</td>
+                                    {% else %}
+                                        <td> {{com.dateLivraison}}</td>
+                                    {% endif %}
+                                    <td> <a href="#"> Télécharger </a> </td> 
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>    
+                {% else %}
+                    <div class="text-center"> 
+                        <h3 class="mb-5"> Actuellement vous avez aucune commande disponible </h3>
+                        <div> <img src="/images/panier/panier.png" width="300"> </div>
+                        <a href="{{ path('categories_index') }}"> <button class="btn btn-success my-5"> Liste des produits </button> </a> 
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+
+{% block javascripts %} 
+
+{% endblock %}
+
+

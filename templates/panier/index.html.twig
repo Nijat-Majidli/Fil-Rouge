@@ -64,8 +64,9 @@
                 
                 {% else %}
                     <div class="text-center"> 
-                        <h3> Votre panier est vide </h3>
-                        <a href="{{ path('categories_index') }}"> <button class="btn btn-success my-5"> + Ajouter produits </button> </a> 
+                        <h3 class="mb-5"> Votre panier est actuellement vide </h3>
+                        <div> <img src="/images/panier/panier.png" width="300"> </div>
+                        <a href="{{ path('categories_index') }}"> <button class="btn btn-success my-5"> + Ajouter des produits </button> </a> 
                     </div>
                 {% endif %}
             </div>

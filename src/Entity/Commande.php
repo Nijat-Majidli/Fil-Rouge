@@ -45,15 +45,15 @@ class Commande
     private $lignedecommandes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commandes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $client;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $comMontant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
 
     public function __construct()
@@ -144,18 +144,6 @@ class Commande
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
     public function getComMontant(): ?float
     {
         return $this->comMontant;
@@ -164,6 +152,18 @@ class Commande
     public function setComMontant(float $comMontant): self
     {
         $this->comMontant = $comMontant;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

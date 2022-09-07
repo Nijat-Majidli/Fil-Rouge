@@ -3,11 +3,21 @@
 {% block title %} {{ Detail.proLibelle }} {% endblock %}
 
 {% block body %}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="ms-5 mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('home')}}">{{ "Accueil" }}</a></li>
+            <li class="breadcrumb-item"><a href="{{path('categories_index')}}">{{ "Catégories" }}</a></li>
+            <li class="breadcrumb-item"><a href="{{path('sous_categories', {id:Detail.sousCat.cat.id})}}">{{ Detail.sousCat.cat.catNom }}</a></li>
+            <li class="breadcrumb-item"><a href="{{path('produit', {id:Detail.sousCat.id})}}">{{ Detail.sousCat.sousCatNom }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ Detail.proLibelle }}</li>
+        </ol>
+    </nav>
+
     <div class="container my-5">
         <form action="{{ path('addPanier', {id:Detail.id}) }}" method="post">
             <div class="row">
                 <div class="col-6 text-center">            
-                    <img src="/images/produits/{{ Detail.proLibelle }}.{{ Detail.proPhoto }}" alt="produit"> 
+                    <img src="/images/produits/{{ Detail.proLibelle }}.{{ Detail.proPhoto }}" alt="produit" class="zoom_photo_produit"> 
                 </div>
                 <div class="col-6 text-start">
                     <h4> {{Detail.proLibelle}} </h4> 

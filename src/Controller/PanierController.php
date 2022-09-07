@@ -168,6 +168,7 @@ class PanierController extends AbstractController
      */
     public function deleteAllPanier(SessionInterface $session, CategoriesRepository $catRepo): Response
     {
+        // On vide le contenu du panier
         $panier = $session->set("panier", []);
 
         //  On peut aussi vider le panier comme ça:   $panier = $session->remove("panier");

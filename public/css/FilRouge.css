@@ -39,7 +39,7 @@ ul li a:hover{
 }
 
 
-/* PAGE home/base.html.twig */
+/* PAGE base.html.twig */
 .logo {
     float: left;
 }
@@ -185,7 +185,20 @@ ul li a:hover{
 
 
 /* PAGE categories/index.html.twig */
+.zoom_img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
+/* PAGE produit/detail.html.twig */
+.zoom_photo_produit:hover {
+    transform: scale(2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+}
 
 
 /* PAGE login.php */

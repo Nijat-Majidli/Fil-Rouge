@@ -3,6 +3,15 @@
 {% block title %} {{ SousCategorie.sousCatNom }} {% endblock %}
 
 {% block body %}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="ms-5 mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('home')}}">{{ "Accueil" }}</a></li>
+            <li class="breadcrumb-item"><a href="{{path('categories_index')}}">{{ "Catégories" }}</a></li>
+            <li class="breadcrumb-item"><a href="{{path('sous_categories', {id:SousCategorie.cat.id})}}">{{ SousCategorie.cat.catNom }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ SousCategorie.sousCatNom }}</li>
+        </ol>
+    </nav>
+
     <div class="container">
         <ul>
             <div class="row justify-content-center mt-4">
@@ -13,7 +22,7 @@
                             <div class="col-4 d-inline">  
                                 <li class="text-center mx-2 my-3">
                                     <a href="{{ path('detail', {id:produit.id}) }}"> 
-                                        <img src="/images/produits/{{ produit.proLibelle }}.{{ produit.proPhoto }}" alt="produit">
+                                        <img src="/images/produits/{{ produit.proLibelle }}.{{ produit.proPhoto }}" alt="produit" class="zoom_img">
                                         <h5>{{produit.proLibelle}}</h5> 
                                     </a> 
                                 </li> 

@@ -1,10 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categories{% endblock %}
-
+{% block title %}Catégories{% endblock %} 
+           
 
 
 {% block body %}
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="ms-5 mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('home')}}">{{ "Accueil" }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ "Catégories" }}</li>
+        </ol>
+    </nav>
+
     <h1 class="text-center my-4"> Toutes nos catégories </h1>
 
     <div class="container">
@@ -14,7 +21,7 @@
                     {% for category in categories %}
                         <li class="d-inline-block text-center my-3 mx-2"> 
                             <a href="{{ path('sous_categories', {id:category.id})}}"> 
-                                <img src="/images/categories/{{ category.catNom }}.{{ category.catPhoto }}" alt="categories"> 
+                                <img src="/images/categories/{{ category.catNom }}.{{ category.catPhoto }}" alt="categories" class="zoom_img"> 
                                 <h4> {{category.catNom}} </h4> 
                             </a>  
                         </li> 

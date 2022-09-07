@@ -14,12 +14,12 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/{id}", name="produit")
      */
-    public function index($id, CategoriesRepository $catRepo, ProduitRepository $pro, SouscategoriesRepository $SousCateg): Response
+    public function index($id, CategoriesRepository $catRepo, ProduitRepository $proRepo, SouscategoriesRepository $SousCatRepo): Response
     {
         return $this->render('produit/index.html.twig', [
             'categories' => $catRepo->findAll(),
-            'Produits' => $pro->findBy(['sousCat'=>$id]),
-            'SousCategorie' => $SousCateg->find($id)
+            'Produits' => $proRepo->findBy(['sousCat'=>$id]),
+            'SousCategorie' => $SousCatRepo->find($id)
         ]);
     }
 
@@ -27,11 +27,11 @@ class ProduitController extends AbstractController
     /**
      * @Route("/detail/{id}", name="detail")
      */
-    public function detail($id, ProduitRepository $pro, CategoriesRepository $catRepo): Response
-    {
+    public function detail($id, ProduitRepository $proRepo, CategoriesRepository $catRepo): Response
+    {    
         return $this->render('produit/detail.html.twig', [
             'categories' => $catRepo->findAll(),
-            'Detail' => $pro->find($id)
+            'Detail' => $proRepo->find($id),
         ]);
     }
 }

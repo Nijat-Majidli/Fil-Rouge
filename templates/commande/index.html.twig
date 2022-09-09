@@ -30,7 +30,7 @@
                                     {% else %}
                                         <td> {{com.dateLivraison}}</td>
                                     {% endif %}
-                                    <td> <a href="#"> Télécharger </a> </td> 
+                                    <td> <a href="{{ path('facture', {id:com.id}) }}"> Télécharger </a> </td> 
                                 </tr>
                             {% endfor %}
                         </tbody>

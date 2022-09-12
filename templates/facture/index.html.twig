@@ -9,6 +9,7 @@
     </style>
 {% endblock %}
 
+{# Ici on ajoute block header afin d'éviter le header tag de "base.html.twig" apparaître dans notre fichier PDF  #}
 {% block header %}{% endblock %}
 
 {% block body %}
@@ -48,11 +49,11 @@
                     <td>{{ prod.pro.prixHT }}</td>
                     <td>{{ prod.quantite }}</td>
                     <td>{{ prod.pro.prixHT * prod.quantite}}</td>
-                    <td>{{ prod.pro.TVA }}</td>
-                    <td>{{ prod.pro.prixTTC * prod.quantite}}</td>
+                    <td>{{ prod.pro.prixHT * prod.quantite * 0.2 }}</td>
+                    <td>{{ prod.pro.prixHT * prod.quantite * 1.2}}</td>
                     {% set TotalHT = TotalHT + (prod.pro.prixHT * prod.quantite) %}
-                    {% set TotalTVA = TotalTVA + prod.pro.TVA %}
-                    {% set TotalTTC = TotalTTC + (prod.pro.prixTTC * prod.quantite) %}
+                    {% set TotalTVA = TotalTVA + (prod.pro.prixHT * prod.quantite * 0.2) %}
+                    {% set TotalTTC = TotalTTC + (prod.pro.prixHT * prod.quantite * 1.2) %}
                 </tr>
             {% endfor %}
                 <tr> 

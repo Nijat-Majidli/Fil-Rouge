@@ -12,14 +12,6 @@ main {
     margin-right: auto;
 }
 
-/* Nous avons ajouté une classe "no-print" dans les balises "header" et "footer" 
-pour indiquer qu'elles ne doivent pas être affichées lors de l'impression du PDF */
-@media print {
-    .no-print {
-        display: none;
-    }
-}
-
 footer {
     text-align: center;
 }

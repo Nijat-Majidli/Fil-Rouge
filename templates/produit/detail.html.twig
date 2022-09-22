@@ -33,5 +33,55 @@
                 </div>
             </div>
         </form>
+        <section>
+            <h5 class="text-center">Commentaires</h5>
+            <br>
+
+            {% if Comments is defined and Comments is not null  %}
+                {% for comment in Comments %}
+                    {{comment.user.userPrenom}} {{comment.user.userNom}} a écrit: <br>
+                    "{{comment.content}}" <br>
+                    {{comment.date|date("d/m/Y à H:i")}} 
+                    {% if app.user %}
+                        {% if comment.user.id is defined and comment.user.id is same as(app.user.id) %}
+                            <a href="#">Modifier</a>
+                            <a href="#">Supprimer</a>
+                        {% endif %}
+                    {% endif %}
+                    <hr>
+                {% endfor %}
+            {% endif %}
+            {# Si l'utilisateur est connecté à son compte #}
+            {% if app.user %}
+                <div class="row">
+                    <div class="col text-center">
+                        <p><a href="#" style="text-decoration:none"><i id="writeComment">Ecrire un commentaire</i></a></p>
+                        <form action="{{ path('add_comment', {userId:app.user.id, produitId:Detail.id}) }}" method="post" style="display:none" id="formComment">
+                            <textarea name="comments" rows="5" cols="100" placeholder="Veuillez commenter ici" style="resize:none"></textarea>
+                            <div class="row justify-content-center mb-5">
+                                <div class="col-2">
+                                    <button type="submit" class="btn btn-success mx-1"> Valider </button>
+                                    <button type="reset" class="btn btn-danger mx-1" id="cancelComment"> Annuler </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+        </section>
     </div>
+{% endblock %}
+
+{% block javascripts %} 
+    <script>
+        $(document).ready(function(){
+            $('#writeComment').click(function(){
+                $('#formComment').css("display", "block");
+            }),
+            $('#cancelComment').click(function(){
+                $('#formComment').css("display", "none");
+            })
+
+        })
+    </script>    
 {% endblock %}

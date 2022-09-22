@@ -7,8 +7,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @ApiResource(
+ *      collectionOperations={
+ *          "post"={
+ *               "normalization_context"={"groups"={"read:comment", "read:comment:full"}}
+ *          }
+ *      }
+ * )
  */
 class Produit
 {
@@ -21,6 +31,7 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:comment:full"})
      */
     private $proLibelle;
 
@@ -64,9 +75,15 @@ class Produit
      */
     private $lignedecommandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="produit")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->lignedecommandes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,6 +211,36 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($lignedecommande->getPro() === $this) {
                 $lignedecommande->setPro(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getProduit() === $this) {
+                $comment->setProduit(null);
             }
         }
 

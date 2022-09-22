@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CategoriesRepository;
+use App\Repository\CommentsRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\SouscategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,11 +28,12 @@ class ProduitController extends AbstractController
     /**
      * @Route("/detail/{id}", name="detail")
      */
-    public function detail($id, ProduitRepository $proRepo, CategoriesRepository $catRepo): Response
+    public function detail($id, ProduitRepository $proRepo, CategoriesRepository $catRepo, CommentsRepository $commentRepo): Response
     {    
         return $this->render('produit/detail.html.twig', [
             'categories' => $catRepo->findAll(),
             'Detail' => $proRepo->find($id),
+            'Comments' => $commentRepo->findBy(['produit'=>$id])
         ]);
     }
 }

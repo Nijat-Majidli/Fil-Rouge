@@ -1,0 +1,1 @@
+L'idée générale de ce projet consistait à écrire des scripts front-end et back-end afin de créer différents pages web du site internet de la société Village Green spécialisée dans le domaine de la distribution du matériel musical.
